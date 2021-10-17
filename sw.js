@@ -12,7 +12,7 @@ if ('serviceWorker' in navigator) {
 
 self.addEventListener('install', function(event) {
     var CACHE_NAME = 'my-site-cache-1';
-    var urlsToCache = ['/index2.html','/css.css'];
+    var urlsToCache = ['/index.html','/css.css'];
         // Perform install steps
         event.waitUntil(
           caches.open(CACHE_NAME)
