@@ -1,5 +1,9 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+//import { initializeApp } from "firebase/app";
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js'
+import { getDatabase  } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js'
+import { getFirestore,collection,getDocs } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -15,10 +19,26 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
 
-window.addEventListener('load', () => {
-    const database = getDatabase();
-    console.log(database)
-    
-    })
+ const app = initializeApp(firebaseConfig);
+ export const db = getFirestore(app);
+
+
+window.addEventListener("load", function(event) {
+  const database = getDatabase();
+getCities(db)
+
+
+
+// Get a list of cities from your database
+async function getCities(db) {
+  console.log("entrando")
+  const citiesCol = collection(db, 'Notas');
+  console.log(citiesCol)
+  const citySnapshot = await getDocs(citiesCol);
+  const cityList = citySnapshot.docs.map(doc => doc.data());
+  console.log(cityList)
+
+  return cityList;
+}
+});
