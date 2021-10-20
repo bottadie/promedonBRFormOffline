@@ -26,19 +26,24 @@ const firebaseConfig = {
 
 window.addEventListener("load", function(event) {
   const database = getDatabase();
-getCities(db)
+});
 
 
-
-// Get a list of cities from your database
 async function getCities(db) {
-  console.log("entrando")
   const citiesCol = collection(db, 'Notas');
-  console.log(citiesCol)
   const citySnapshot = await getDocs(citiesCol);
   const cityList = citySnapshot.docs.map(doc => doc.data());
   console.log(cityList)
+  cityList.forEach(element => console.log(element));
+  console.log("Llegue hasta el final")
+  return cityList;}
 
-  return cityList;
-}
-});
+
+document.querySelector('#btnBasedDeDatos').addEventListener('click', function(evento) {
+ var listadeNotas =  getCities(db)
+ console.log(listadeNotas)
+ //listadeNotas.forEach(element => console.log(element));       
+})
+
+ 
+
