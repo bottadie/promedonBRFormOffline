@@ -19,11 +19,22 @@
     <hr>
 <button id="btnBasedDeDatos">Carga la base</button>
 <button id ="btnCargaFirestore">Usa este botón para cargar en firestore</button>
+<button id="statusCheck">Click to check the <tt>window.navigator.onLine</tt> property</button><br /><br />
+Check the console below for results:
+
     <div id="resultado"></div>
 
     <script>
+function detectStatus(){
 
+
+document.getElementById('statusCheck').addEventListener('click', () => console.log('window.navigator.onLine is ' + window.navigator.onLine));
+}
         window.addEventListener('load', () => {
+            console.log('Initially ' + (window.navigator.onLine ? 'on' : 'off') + 'line');
+
+window.addEventListener('online', () => console.log('Became online'));
+window.addEventListener('offline', () => console.log('Became offline'));
 
             let baseDatos;
             let solicitudConexion = indexedDB.open('notasBd', 1);
