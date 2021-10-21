@@ -23,9 +23,9 @@ const firebaseConfig = {
  const app = initializeApp(firebaseConfig);
  export const db = getFirestore(app);
 
-
 window.addEventListener("load", function(event) {
   const database = getDatabase();
+  
 });
 
 
