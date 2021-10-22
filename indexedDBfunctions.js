@@ -78,12 +78,46 @@ window.addEventListener('offline', () => console.log('Became offline'));
             // for clarity.
     
             // Now work with the db variable
-            var store = db.transaction(['notas'],'readwrite').objectStore('notas');
+            let transaction = db.transaction('notas','readwrite')
+            let notas = transaction.objectStore("notas"); // (2)
+         
+          var request = notas.getAll()
+          var currentReadyState = request.readyState;
+
+
+          request.onerror = function(event) {
+            console.log('No se tiene todavia')
+          };
+          
+          request.onsuccess = function(event) {
+                    
+            // almacena el resultado de abrir la base de datos.
+            console.log(request.result)
+            
+          }/*
+          
+          
+          console.log(currentReadyState)
+            console.log(request)
+          request.onsucess = function() {
+               console.log(request)}*/
+           /*    if (request.result !== undefined) {
+                console.log("Books", request.result); // array de libros con precio = 10
+              } else {
+                console.log("No hay libros así");
+              }
+           }
+           */
+
+
+        //    let transaction = db.transaction("books", "readwrite"); // (1)
+
+        //  console.log(notasFinales)
             // do some more stuff with store....
 
 
 
-           console.log(store)
+          // console.log(store)
           // let transaccion = baseDatos.transaction(['notas'], 'readwrite');
    //    const items = baseDatos.transaction(['notas'],'read').objectStore('notas').getAll()
  //  var request = transaccion.getAll();
