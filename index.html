@@ -4,95 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/">
-    <title>Formulario médico de cirugias</title>
+    <title>Formulario quirurgico</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="index2css.css">
 </head>
 <body>
-    Nueva nota <br>
-    <form action="#">
-        <div>
-            <label for="contenido">Detalle de la operación</label>
-            <input type="text" id="contenido">
-        </div>
+    <form action="/" class="decor">
+      <div class="form-left-decoration"></div>
+      <div class="form-right-decoration"></div>
+      <div class="circle"></div>
+      <div class="form-inner">
+        <h1>Envio de datos</h1>
+        <input type="text" placeholder="Nombre y apellido">
+        <input type="text" placeholder="Correo electronico">
+        <textarea  id="contenido" placeholder="Mensaje..." rows="5"></textarea>
+        <button type="submit" href="/">Enviar</button>
+        <button id ="btnBorrar">Borrar</button> 
+
+            <button id="btnAgregar">Carga en indexedDB</button>
+        <button id ="btnCargaFirestore">Cargar en firestore</button>
+        <button id="btnBasedDeDatos">Muestra datos</button>
+        <button id="btnBaseDeDatosIndexed">Muestra datos Indexed</button>
+
+        <button id="statusCheck">¿Tengo internet?</button>
+
+      </div>
     </form>
-    <button id="btnAgregar">Agregar</button>
-    <button id ="btnBorrar">Borrar</button>
-    <hr>
-<button id="btnBasedDeDatos">Carga la base</button>
-<button id ="btnCargaFirestore">Usa este botón para cargar en firestore</button>
-<button id="statusCheck">Click to check the <tt>window.navigator.onLine</tt> property</button><br /><br />
-Check the console below for results:
-
-    <div id="resultado"></div>
-
-    <script>
-function detectStatus(){
-
-
-document.getElementById('statusCheck').addEventListener('click', () => console.log('window.navigator.onLine is ' + window.navigator.onLine));
-}
-        window.addEventListener('load', () => {
-            console.log('Initially ' + (window.navigator.onLine ? 'on' : 'off') + 'line');
-
-window.addEventListener('online', () => console.log('Became online'));
-window.addEventListener('offline', () => console.log('Became offline'));
-
-            let baseDatos;
-            let solicitudConexion = indexedDB.open('notasBd', 1);
-
-            solicitudConexion.onsuccess = function(evento) {
-                baseDatos = evento.target.result;
-            }
-
-            solicitudConexion.onerror = function(evento) {
-                document.querySelector('#resultado').innerText = `Error al abrir la base de datos: ${evento.target.errorCode}`;
-            }
-
-            solicitudConexion.onupgradeneeded = function(evento) {
-                baseDatos = event.target.result;
-
-                let notas = baseDatos.createObjectStore('notas', {autoIncrement: true});
-            }
-
-            document.querySelector('#btnAgregar').addEventListener('click', function(evento) {
-                let contenido = document.querySelector('#contenido').value;
-
-                if(contenido.length){
-                    let transaccion = baseDatos.transaction(['notas'], 'readwrite');
-                    let notas = transaccion.objectStore('notas');
-
-                    let nota = {contenido: contenido, estampa_tiempo: Date.now()};
-                    notas.add(nota);
-
-                    transaccion.oncomplete = function() {
-                        document.querySelector('#resultado').innerText = 'La nota se ha creado de forma satisfactoria.';
-                    }
-
-                    transaccion.onerror = function(evento) {
-                        document.querySelector('#resultado').innerText = `Error al intentar almacenar una nota: ${evento.target.errorCode}`;
-                    }
-
-                } else {
-                    document.querySelector('#resultado').innerText = 'No ha escrito ningún valor en el campo contenido.';
-                }
-            });
-        
-     document.querySelector('#btnBorrar').addEventListener('click', function(evento) {
-        
-        let transaccion = baseDatos.transaction(['notas'], 'readwrite').objectStore('notas');
-        var keyRange = IDBKeyRange.upperBound("0")
-        let registro = transaccion.delete(keyRange)
-                    
- //var display=  displayData();
-//console.log(display)
-   // document.querySelector('#resultado').innerText = `Estas haciendo clic ${info}`;
-
-    });
-        });
-        
-    </script>
+  </body>
+ 
     <script src="sw.js"></script>
     <script src="firebase.js" type='module' ></script>
     <script src="firebasefunctions.js" type='module'></script>
+    <script src="indexedDBfunctions.js" type='module'></script>
 
 </body>
 </html>

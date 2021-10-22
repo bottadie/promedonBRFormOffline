@@ -22,13 +22,12 @@ console.log(doc)        })
   });
 
 
-document.querySelector('#btnCargaFirestore').addEventListener('click', envioDatosFirestore())
+document.querySelector('#btnCargaFirestore').addEventListener('click',async function envioDatosFirestore(){
+  let contenido = document.querySelector('#contenido').value;
 
-async function envioDatosFirestore(){
+//async function envioDatosFirestore(){
   console.log("2Entre")
   await addDoc(collection(db, "Notas"), {
-    name: "Los Angeles",
-    state: "CA",
-    country: "USA"
+    Nota: contenido,
   })
-console.log("ya lo registre")};
+console.log("ya lo registre")})
