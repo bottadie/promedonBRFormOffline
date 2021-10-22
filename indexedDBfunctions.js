@@ -67,11 +67,29 @@ window.addEventListener('offline', () => console.log('Became offline'));
     });
         
 
-    document.querySelector('#btnBaseDeDatosIndexed').addEventListener('click', function(evento) {
+    document.querySelector('#btnBaseDeDatosIndexed').addEventListener('click',async function(evento) {
+        var request = window.indexedDB.open('notasBd');
+        request.onsuccess = function(event) {
+            // Use this db variable, not your global one
+            var db = event.target.result;
+    
+                // Note that you can also access the db variable using other means
+            // here like this.result or request.result, but I like to use event.target
+            // for clarity.
+    
+            // Now work with the db variable
+            var store = db.transaction(['notas'],'readwrite').objectStore('notas');
+            // do some more stuff with store....
 
-           console.log(baseDatos)})
-           
-  /*  var allRecords = baseDatos.getAll();
+
+
+           console.log(store)
+          // let transaccion = baseDatos.transaction(['notas'], 'readwrite');
+   //    const items = baseDatos.transaction(['notas'],'read').objectStore('notas').getAll()
+ //  var request = transaccion.getAll();
+      
+    }})
+  /*var allRecords = baseDatos.getAll();
     allRecords.onsuccess = function() {
         console.log(allRecords.result);
-          }});*/
+          }})*/
