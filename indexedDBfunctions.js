@@ -1,17 +1,4 @@
-function detectStatus(){
-document.getElementById('statusCheck').addEventListener('click', () => console.log('window.navigator.onLine is ' + window.navigator.onLine));
-}
 
-window.addEventListener('load', () => {
-            console.log('Initially ' + (window.navigator.onLine ? 'on' : 'off') + 'line');
-})
-
-window.addEventListener('online', () => { 
-    console.log('Became online')
-        });
-
-
-window.addEventListener('offline', () => console.log('Became offline'));
 
             let baseDatos;
             let solicitudConexion = indexedDB.open('notasBd', 1);
@@ -91,39 +78,8 @@ window.addEventListener('offline', () => console.log('Became offline'));
           
           request.onsuccess = function(event) {
                     
-            // almacena el resultado de abrir la base de datos.
             console.log(request.result)
             
-          }/*
-          
-          
-          console.log(currentReadyState)
-            console.log(request)
-          request.onsucess = function() {
-               console.log(request)}*/
-           /*    if (request.result !== undefined) {
-                console.log("Books", request.result); // array de libros con precio = 10
-              } else {
-                console.log("No hay libros así");
-              }
-           }
-           */
-
-
-        //    let transaction = db.transaction("books", "readwrite"); // (1)
-
-        //  console.log(notasFinales)
-            // do some more stuff with store....
-
-
-
-          // console.log(store)
-          // let transaccion = baseDatos.transaction(['notas'], 'readwrite');
-   //    const items = baseDatos.transaction(['notas'],'read').objectStore('notas').getAll()
- //  var request = transaccion.getAll();
+          }
       
     }})
-  /*var allRecords = baseDatos.getAll();
-    allRecords.onsuccess = function() {
-        console.log(allRecords.result);
-          }})*/
