@@ -6,9 +6,10 @@
     <base href="/">
     <title>Formulario quirurgico</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="index2css.css">
+    <link rel="stylesheet" href="indexCss.css">
 </head>
 <body>
+  
    
   <div class="decor"> 
       <div class="form-left-decoration"></div>
@@ -26,18 +27,20 @@
         <button id ="btnCargaFirestore">Cargar en firestore</button>
         <button id="btnBasedDeDatos">Muestra datos</button>
         <button id="btnBaseDeDatosIndexed">Muestra datos Indexed</button>
+        
 
         <button id="statusCheck">¿Tengo internet?</button>
-        </div>
+        <div id="resultado"></div>  
+      </div>
 
       </div>
   </body>
  
-    <script src="sw.js"></script>
+    <script src="sw.js"></script> 
     <script src="firebase.js" type='module' ></script>
     <script src="firebasefunctions.js" type='module'></script>
-    <script src="indexedDBfunctions.js" type='module'></script>
     <script src="comportamientoNetwork.js" type='module'></script>
+    <script src="indexedDBfunctions.js" type='module'></script>
 
     
 </body>
